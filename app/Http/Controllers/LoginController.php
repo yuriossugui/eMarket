@@ -27,4 +27,13 @@ class LoginController extends Controller
             return redirect()->back()->with('error', 'E-mail ou senha inválida.');
         }
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('/');
+    }
 }
