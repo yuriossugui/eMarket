@@ -1,66 +1,43 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# eMarket, um E-commerce Simples - Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este projeto é um e-commerce simples desenvolvido com o framework Laravel. O foco principal é o estudo e a aplicação de boas práticas de programação, organização de código e padrões de desenvolvimento em projetos Laravel. O sistema é dividido em duas partes:
 
-## About Laravel
+- **Admin**: Área administrativa para cadastro de produtos, categorias, gerenciamento de usuários e configurações gerais do sistema.
+- **FrontEnd**: Área de exibição dos produtos, onde os usuários podem navegar entre os itens, visualizar detalhes e entrar em contato com vendedores.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Estrutura do Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O projeto está em fase inicial de desenvolvimento. Abaixo está a estrutura atual das funcionalidades:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin
+- Cadastro de produtos: Criação, edição e exclusão de produtos.
+- Gestão de estoque
+- Gestão de categorias e marcas.
+- Controle de usuários e permissões.
 
-## Learning Laravel
+### FrontEnd
+- Catálogo de produtos
+- Filtros por categorias, marcas e preços
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tecnologias Utilizadas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Backend**: Laravel (PHP)
+- **Frontend**: Blade (Laravel) + HTML, CSS e JavaScript
+- **Banco de Dados**: MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Funcionalidades Futuras
 
-## Laravel Sponsors
+- Adicionar sistema de carrinho de compras.
+- Implementar checkout e pagamento.
+- Desenvolver sistema de envio de e-mails para notificação de pedidos.
+- Melhorias no design responsivo para dispositivos móveis.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Contribuindo
 
-### Premium Partners
+Este projeto está em fase inicial e está aberto para contribuições. Se você deseja melhorar ou adicionar novas funcionalidades, sinta-se à vontade para criar uma *issue* ou enviar um *pull request*.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Boas Práticas de Programação
+O projeto é desenvolvido com foco em boas práticas de programação, incluindo:
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Organização de controllers**, **migrations**, **models**, **views** e **routes** de acordo com as convenções do Laravel.
+- Validações de dados e autenticação de usuários.
