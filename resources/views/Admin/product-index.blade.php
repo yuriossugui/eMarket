@@ -1,8 +1,15 @@
-<h1>PRODUCT INDEX</h1>
+@extends('adminlte::page')
 
-<a href="{{ route('logout') }}">Sair</a>
+@section('content_header')
+    <h1>PRODUCT INDEX</h1>
+@endsection
 
-<!-- checks if are authenticated -->
-@auth
-    <h2>{{ auth()->user()->email }}</h2>
-@endauth
+@section('content')
+    <a href="{{ route('logout') }}">Sair</a>
+
+    <!-- checks if are authenticated -->
+    @auth
+        <h2>{{ auth()->user()->email }}</h2>
+    @endauth
+
+@endsection
