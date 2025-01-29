@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'eMarket',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>e</b>Market',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -302,42 +302,48 @@ return [
         // Navbar items:
         [
             'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
+            'text' => 'procurar',
+            'topnav_right' => false,
         ],
         [
             'type' => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'procurar',
+        ],
+        ['header' => 'PRODUTOS'],
+        [
+            'text' => 'Produto',
+            'url' => 'admin/product-index',
+            'icon' => 'fas fa-shopping-cart',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Marca',
+            'url' => 'admin/brand-index',
+            'icon' => 'fas fa-tag',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Categoria',
+            'url' => 'admin/category-index',
+            'icon' => 'fas fa-folder',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'USUÁRIOS'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Usuario',
+            'url' => 'admin/user-index',
+            'icon' => 'fas fa-user',
         ],
+        ['header' => 'ESTOQUE'],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Estoque',
+            'url' => 'admin/storage-index',
+            'icon' => 'fas fa-box',
         ],
+        ['header' => 'OPERAÇÕES'],
         [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
