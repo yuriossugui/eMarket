@@ -64,11 +64,11 @@ return [
     */
 
     'logo' => '<b>e</b>Market',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img' => '',
+    'logo_img_class' => '',
+    'logo_img_xl' => null,  
+    'logo_img_xl_class' => '',
+    'logo_img_alt' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -256,7 +256,7 @@ return [
     |
     */
 
-    'use_route_url' => false,
+    'use_route_url' => true,
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
@@ -333,7 +333,7 @@ return [
         ],
         ['header' => 'USUÁRIOS'],
         [
-            'text' => 'Usuario',
+            'text' => 'Usuário',
             'url' => 'admin/user-index',
             'icon' => 'fas fa-user',
         ],
@@ -345,59 +345,16 @@ return [
         ],
         ['header' => 'OPERAÇÕES'],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
+            'text' => 'Saída',
+            'url' => 'admin/outbound',
+            'icon' => 'fas fa-arrow-left',
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
+            'text' => 'Entrada',
+            'url' => 'admin/inbound',
+            'icon' => 'fas fa-arrow-right',
         ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
+        
     ],
 
     /*
