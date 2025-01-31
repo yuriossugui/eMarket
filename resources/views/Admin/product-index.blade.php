@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Product Index')
+@section('title', 'Produto')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
@@ -32,6 +32,12 @@
     </div>
 
     <hr>
+
+    <div class="d-flex justify-content-start mb-2">
+        <a href="{{ route('product.create.form') }}">
+            <button class="btn btn-primary">Cadastrar</button>
+        </a>
+    </div>
 
     <table class="table text-center table-bordered table-hover">
         <thead>

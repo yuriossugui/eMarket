@@ -13,3 +13,4 @@ Route::post('/login', [LoginController::class, 'auth'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index')->middleware('auth');
+Route::get('/admin/product-create-form', [ProductController::class, 'createForm'])->name('product.create.form')->middleware('auth');
