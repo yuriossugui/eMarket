@@ -19,6 +19,9 @@
                     <input class="form-control" type="text" name="" id="" placeholder="Descrição">
                 </div>
                 <div class="">
+                    <input class="form-control" type="text" name="" id="" placeholder="Preço">
+                </div>
+                <div class="">
                     <select class="form-control" name="" id="">
                         <option value="" selected>Selecione uma opção</option>
                     </select>
@@ -27,6 +30,8 @@
             </div>
         </form>
     </div>
+
+    <hr>
 
     <table class="table text-center table-bordered table-hover">
         <thead>

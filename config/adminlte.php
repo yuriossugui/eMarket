@@ -320,6 +320,13 @@ return [
             'text' => 'Produto',
             'url' => 'admin/product-index',
             'icon' => 'fas fa-shopping-cart',
+            'submenu' => [
+                [
+                'text' => 'Desconto',
+                'url' => 'admin/discount-index',
+                'icon' => 'fas fa-percent', 
+                ]
+            ],
         ],
         [
             'text' => 'Marca',
@@ -360,7 +367,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
-    |--------------------------------------------------------------------------
+    |------------------------------------------     -------------------------------
     |
     | Here we can modify the menu filters of the admin panel.
     |
