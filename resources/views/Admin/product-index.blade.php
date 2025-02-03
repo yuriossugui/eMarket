@@ -43,7 +43,7 @@
         <thead>
             <tr>
                 <th>Código</th>
-                <th>Descrição</th>
+                <th>Nome</th>
                 <th>Preço</th>
                 <th>Estoque</th>
                 <th>Categoria</th>
