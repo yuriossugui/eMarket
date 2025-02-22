@@ -2,14 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login-form');
+        return view('login.login');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('login.register');
+    }
+
+    public function store(Request $request)
+    {
+        $userModel = new User();
+
+        $userModel->name = $request['name'];
+        $userModel->email = $request['email'];
+        $userModel->password = $request['password'];
+
+        $userModel->save();
+
+        return redirect('/admin/product-index');
     }
 
     public function auth(Request $request)
