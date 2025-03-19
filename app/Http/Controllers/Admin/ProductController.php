@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('Admin.product-index');
+        return view('Admin.product-index'); 
     }
 
     public function createForm()

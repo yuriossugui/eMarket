@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-2">
             <label for="price" class="form-label">Preço</label>
-            <input type="number" class="form-control" id="price" name="price" required>
+            <input type="text" class="form-control" id="price" name="price" required>
         </div>        
     </div>
 
@@ -35,15 +35,13 @@
         <textarea class="form-control" name="description"></textarea>
     </div>
 
-    <div class="container mt-2 m-3">
-        <!-- Input customizado para arquivos -->
-        <div class="custom-file mb-3">
-            <label for="" class="form-label"></label>
-          <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+    <div class="row mt-3 m-3">
+        <div class="col-md">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
         </div>
-    
-        <!-- Área para exibir a imagem de pré-visualização -->
-        <div id="preview" class="mb-3"></div>
     </div>
     
 

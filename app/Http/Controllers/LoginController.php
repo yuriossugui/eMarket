@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
+// Admin@2005!
+
 class LoginController extends Controller
 {
     public function showLoginForm()
