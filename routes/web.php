@@ -16,7 +16,8 @@ Route::post('/register', [LoginController::class, 'store'])->name('register.stor
 Route::post('/login', [LoginController::class, 'auth'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// product routes
 Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
-Route::get('/admin/product-create-form', [ProductController::class, 'createForm'])->name('product.create.form')->middleware('auth');
+Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create');
 
 Route::get('/admin/category-index', [CategoryController::class, 'index'])->name('category.index')->middleware('auth');
