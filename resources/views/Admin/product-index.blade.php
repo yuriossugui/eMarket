@@ -31,7 +31,6 @@
         </div>
     @endif
 
-
     <div class="d-flex justify-content-start mb-2 gap-2">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProductForm">
@@ -80,7 +79,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('create.product') }}" method="post">
+        <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row mb-2">
                 <div class="col">
@@ -104,7 +103,10 @@
                 <div class="col">
                     <label for="category_id" class="form-label">Categoria</label>
                     <select name="category_id" id="category_id" class="form-control">
-
+                        <option value="" selected>Selecione uma opção</option>
+                        @foreach($categories as $c)
+                            <option value="{{$c['id']}}">{{ $c['name'] }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
