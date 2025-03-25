@@ -18,6 +18,5 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // product routes
 Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
-Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create');
-
-Route::get('/admin/category-index', [CategoryController::class, 'index'])->name('category.index')->middleware('auth');
+Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create.product');
+Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');

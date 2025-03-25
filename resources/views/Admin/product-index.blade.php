@@ -7,36 +7,38 @@
 @endsection
 
 
-@section('content')
+@section('content') 
 
-    <div class="p-2 mb-3">
-        <form action="" method="get">
-            <div class="d-flex flex-row justify-content-around">
-                <div class="">
-                    <input class="form-control" type="text" name="" id="" placeholder="Código">
-                </div>
-                <div class="">
-                    <input class="form-control" type="text" name="" id="" placeholder="Descrição">
-                </div>
-                <div class="">
-                    <input class="form-control" type="text" name="" id="" placeholder="Preço">
-                </div>
-                <div class="">
-                    <select class="form-control" name="" id="">
-                        <option value="" selected>Selecione uma opção</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary" type="submit">Filtrar</button>
-            </div>
-        </form>
-    </div>
+    @if(session('msgSuccess') != null )
+        <div class="alert alert-success">
+            {{ session('msgSuccess') }}
+        </div>
+    @endif
 
-    <hr>
+    @if(session('msgError') != null )
+        <div class="alert alert-danger">
+            {{ session('msgSuccess') }}
+        </div>
+    @endif
 
-    <div class="d-flex justify-content-start mb-2">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
+    <div class="d-flex justify-content-start mb-2 gap-2">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Cadastrar
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProductForm">
+            Cadastrar Produto
+        </button>
+        <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#createCategoryForm">
+            Cadastrar Categoria
         </button>
     </div>
 
@@ -45,11 +47,11 @@
             <tr>
                 <th>Código</th>
                 <th>Nome</th>
-                <th>Preço</th>
+                <th>Descrição</th>
                 <th>Estoque</th>
-                <th>Categoria</th>
+                <th>Preço</th>
                 <th>Imagem</th>
-                <th>Ver</th>
+                <th>Categoria</th>
                 <th>Editar</th>
                 <th>Excluir</th>
             </tr>
@@ -61,14 +63,14 @@
             <th></th>
             <th></th>
             <th></th>
-            <th><a href=""><i class="fas fa-eye"></i></a></th>
+            <th></th>
             <th><a href=""><i class="fas fa-pen"></i></a></th>
             <th><a href=""><i class="fas fa-trash"></i></a></th>
         </tbody>
     </table>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- create product form -->
+<div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,8 +80,71 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('')}}" method="post">
+        <form action="{{ route('create.product') }}" method="post">
+            @csrf
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="price" class="form-label">Preço</label>
+                    <input type="price" name="price" id="price" class="form-control">
+                </div>
+            </div>
 
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="description" class="form-label">Descrição</label>
+                    <textarea name="description" id="description" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="category_id" class="form-label">Categoria</label>
+                    <select name="category_id" id="category_id" class="form-control">
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="image" class="form-label">Imagem</label>
+                    <input type="file" name="image" id="image" class="form-control-file">
+                </div>
+            </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- create category form -->
+<div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('create.category') }}" method="post">
+            @csrf
+            <div class="row mb-2">
+                <div class="col">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
