@@ -14,7 +14,9 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        return view('Admin.product-index',['categories'=>$categories]); 
+        $products = Product::paginate(5);
+
+        return view('Admin.product-index',['categories'=>$categories, 'products'=>$products]); 
     }
 
     public function create(Request $request)
@@ -67,7 +69,9 @@ class ProductController extends Controller
                 $product->image = $imageName; 
             }
 
-            
+            $product->save();
+
+            return redirect('/admin/product-index')->with('msgSuccess','Produto cadastrados com sucesso !');
 
         }catch(\Illuminate\Validation\ValidationException $e){
             return redirect()->back()->withErrors($e->errors())->withInput();

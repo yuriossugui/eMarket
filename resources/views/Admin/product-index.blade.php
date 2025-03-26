@@ -56,17 +56,23 @@
             </tr>
         </thead>
         <tbody>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th><a href=""><i class="fas fa-pen"></i></a></th>
-            <th><a href=""><i class="fas fa-trash"></i></a></th>
+            @foreach($products as $p)
+                <tr>
+                    <td>{{$p['id']}}</td>
+                    <td>{{$p['name']}}</td>
+                    <td>{{$p['description']}}</td>
+                    <td>{{$p['stock']}}</td>
+                    <td>{{$p['price']}}</td>
+                    <td><img src="{{ asset('img/productImages/'.$p['image']) }}" alt="" style="width:60px;height:60px"></td>
+                    <td>{{$p['category_id']}}</td>
+                    <td><a href=""><i class="fas fa-pen"></i></a></td>
+                    <td><a href=""><i class="fas fa-trash"></i></a></td>
+                </tr>       
+            @endforeach
         </tbody>
     </table>
+
+    {{ $products->links('pagination::bootstrap-5') }}
 
 <!-- create product form -->
 <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
