@@ -20,3 +20,4 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
 Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create.product');
 Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');
+Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);

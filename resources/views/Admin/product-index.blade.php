@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 @endsection
 
-
 @section('content') 
 
     @if(session('msgSuccess') != null )
@@ -30,7 +29,7 @@
             </ul>
         </div>
     @endif
-
+    
     <div class="d-flex justify-content-start mb-2 gap-2">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProductForm">
@@ -58,14 +57,14 @@
         <tbody>
             @foreach($products as $p)
                 <tr>
-                    <td>{{$p['id']}}</td>
-                    <td>{{$p['name']}}</td>
-                    <td>{{$p['description']}}</td>
-                    <td>{{$p['stock']}}</td>
-                    <td>{{$p['price']}}</td>
-                    <td><img src="{{ asset('img/productImages/'.$p['image']) }}" alt="" style="width:60px;height:60px"></td>
-                    <td>{{$p['category_id']}}</td>
-                    <td><a href=""><i class="fas fa-pen"></i></a></td>
+                    <td>{{$p->id}}</td>
+                    <td>{{$p->name}}</td>
+                    <td>{{$p->description}}</td>
+                    <td>{{$p->stock}}</td>
+                    <td>{{$p->price}}</td>
+                    <td><img src="{{ asset('img/productImages/'.$p->image) }}" alt="" style="width:60px;height:60px"></td>
+                    <td>{{$p->category->category_name}}</td>
+                    <td><a href="admin/product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                     <td><a href=""><i class="fas fa-trash"></i></a></td>
                 </tr>       
             @endforeach
@@ -74,93 +73,93 @@
 
     {{ $products->links('pagination::bootstrap-5') }}
 
-<!-- create product form -->
-<div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" name="name" id="name" class="form-control">
+    <!-- create product form -->
+    <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="price" class="form-label">Preço</label>
+                        <input type="price" name="price" id="price" class="form-control">
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="price" class="form-label">Preço</label>
-                    <input type="price" name="price" id="price" class="form-control">
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="description" class="form-label">Descrição</label>
+                        <textarea name="description" id="description" class="form-control"></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="description" class="form-label">Descrição</label>
-                    <textarea name="description" id="description" class="form-control"></textarea>
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="category_id" class="form-label">Categoria</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="" selected>Selecione uma opção</option>
+                            @foreach($categories as $c)
+                                <option value="{{$c->id}}">{{ $c->category_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="category_id" class="form-label">Categoria</label>
-                    <select name="category_id" id="category_id" class="form-control">
-                        <option value="" selected>Selecione uma opção</option>
-                        @foreach($categories as $c)
-                            <option value="{{$c['id']}}">{{ $c['name'] }}</option>
-                        @endforeach
-                    </select>
+                <div class="row">
+                    <div class="col">
+                        <label for="image" class="form-label">Imagem</label>
+                        <input type="file" name="image" id="image" class="form-control-file">
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="image" class="form-label">Imagem</label>
-                    <input type="file" name="image" id="image" class="form-control-file">
+
                 </div>
-            </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </div>
-        </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-</div>
-
-<!-- create category form -->
-<div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('create.category') }}" method="post">
-            @csrf
-            <div class="row mb-2">
-                <div class="col">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" name="name" id="name" class="form-control">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </div>
-        </form>
     </div>
-  </div>
-</div>
+
+    <!-- create category form -->
+    <div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('create.category') }}" method="post">
+                @csrf
+                <div class="row mb-2">
+                    <div class="col">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" name="category_name" id="category_name" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
 
 @endsection

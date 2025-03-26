@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        $products = Product::paginate(5);
+        $products = Product::with('category')->paginate(5);
 
         return view('Admin.product-index',['categories'=>$categories, 'products'=>$products]); 
     }
@@ -75,9 +76,11 @@ class ProductController extends Controller
 
         }catch(\Illuminate\Validation\ValidationException $e){
             return redirect()->back()->withErrors($e->errors())->withInput();
+            Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }
         catch(Exception $e){
             return redirect()->back()->withErrors($e->getMessage());
+            Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }
 
     }
@@ -88,18 +91,18 @@ class ProductController extends Controller
 
             $validated = $request->validate(
             [
-                'name'=>'required|min:2|max:50',  
+                'category_name'=>'required|min:2|max:50',  
             ],
             [
-                'name.required' => 'O campo nome é obrigatório.',
-                'name.min' => 'O nome deve ter pelo menos 2 caracteres.',
-                'name.max' => 'O nome não pode ter mais de 50 caracteres.',
+                'category_name.required' => 'O campo nome é obrigatório.',
+                'category_name.min' => 'O nome deve ter pelo menos 2 caracteres.',
+                'category_name.max' => 'O nome não pode ter mais de 50 caracteres.',
             ]
             );
     
             $categoryModel = new Category();
     
-            $categoryModel->name = $validated['name'];
+            $categoryModel->category_name = $validated['category_name'];
     
             $categoryModel->save();
             
@@ -107,8 +110,20 @@ class ProductController extends Controller
 
         }catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
+            Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+        }catch(Exception $e){
+            Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }
 
+    }
+
+    public function show(Request $request)
+    {
+        // try{
+        //     $product = 
+        // }catch(Exception $e){
+        //     return redirect()->back()->withErrors($e->getMessage());
+        // }
     }
 
 }
