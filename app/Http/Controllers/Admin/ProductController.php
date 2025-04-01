@@ -119,11 +119,27 @@ class ProductController extends Controller
 
     public function show(Request $request)
     {
-        // try{
-        //     $product = 
-        // }catch(Exception $e){
-        //     return redirect()->back()->withErrors($e->getMessage());
-        // }
+        try{
+            $categories = Category::all();
+
+            $product = Product::with('category')->findOrFail($request->id);
+
+            return view('Admin.product-show',['product'=>$product, 'categories'=>$categories]); 
+        }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        try{
+            
+            Product::findOrFail($request->id)->update($request->all());
+
+            return redirect('/admin/product-index')->with('msgSuccess','Produto editado com sucesso !');
+        }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 
 }

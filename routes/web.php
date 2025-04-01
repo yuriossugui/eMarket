@@ -21,3 +21,4 @@ Route::get('/admin/product-index', [ProductController::class, 'index'])->name('p
 Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create.product');
 Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');
 Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);
+Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
