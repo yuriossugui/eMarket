@@ -24,3 +24,4 @@ Route::post('/admin/create-category', [ProductController::class, 'createCategory
 
 // clientes
 Route::resource('clientes', ClienteController::class);
+Route::get('/admin/client-index', [ClienteController::class, 'index'])->name('client.index');
