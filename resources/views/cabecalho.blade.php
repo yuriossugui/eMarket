@@ -13,9 +13,6 @@
           <a class="nav-link" href="/clientes">Clientes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/category-index">Categorias</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/admin/product-index">Produtos</a>
         </li>
        

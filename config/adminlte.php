@@ -339,7 +339,7 @@ return [
         ],
         [
             'text' => 'Clientes',
-            'url' => 'admin/user-index',
+            'url' => '/clientes',
             'icon' => 'fas fa-user',
         ],
         ['header' => 'ESTOQUE'],
