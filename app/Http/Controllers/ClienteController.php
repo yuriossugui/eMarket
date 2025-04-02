@@ -15,7 +15,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        return view('clientes.index', compact('clientes'));
+        return view('Admin.client-index', compact('clientes'));
 
     }
 
@@ -24,7 +24,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+        $clientes = Cliente::all();
+        return view('Admin.client-create', compact('clientes'));
+       
     }
 
     /**
@@ -49,8 +51,8 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        $cliente = Cliente::findOrFail($id);
-        return view('clientes.show', compact('cliente'));
+        $clientes = Cliente::findOrFail($id);
+        return view('Admin.client-show', compact('clientes'));
     }
 
     /**
@@ -58,8 +60,8 @@ class ClienteController extends Controller
      */
     public function edit(string $id)
     {
-        $cliente = Cliente::findOrFail($id);
-        return view("clientes.edit", compact('clientes'));
+        $clientes = Cliente::findOrFail($id);
+        return view("Admin.client-edit", compact('clientes'));
     }
 
     /**
@@ -68,8 +70,8 @@ class ClienteController extends Controller
     public function update(Request $request, string $id)
     {
         try{
-            $cliente = Cliente::findOrFail($id);
-            $cliente->update($request->all());
+            $clientes = Cliente::findOrFail($id);
+            $clientes->update($request->all());
             return redirect()->route('clientes.index')
                 ->with('sucesso', 'Cliente alterado com sucesso!');
         } catch (Exception $e){
