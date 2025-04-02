@@ -22,3 +22,4 @@ Route::post('/admin/create-product', [ProductController::class, 'create'])->name
 Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');
 Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);
 Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
+Route::delete('/admin/product-destroy/{id}', [ProductController::class, 'delete']);

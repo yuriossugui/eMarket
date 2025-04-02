@@ -320,13 +320,6 @@ return [
             'text' => 'Produto',
             'url' => 'admin/product-index',
             'icon' => 'fas fa-shopping-cart',
-            'submenu' => [
-                [
-                'text' => 'Desconto',
-                'url' => 'admin/discount-index',
-                'icon' => 'fas fa-percent', 
-                ]
-            ],
         ],
         [
             'text' => 'Marca',
@@ -341,6 +334,11 @@ return [
         ['header' => 'USUÁRIOS'],
         [
             'text' => 'Usuário',
+            'url' => 'admin/user-index',
+            'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => 'Clientes',
             'url' => 'admin/user-index',
             'icon' => 'fas fa-user',
         ],

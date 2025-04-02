@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 @endsection
 
+@section('js')
+    <script src="{{ asset('js/product-index.js') }}"></script>
+@endsection
+
 @section('content') 
 
     @if(session('msgSuccess') != null )
@@ -65,7 +69,7 @@
                     <td><img src="{{ asset('img/productImages/'.$p->image) }}" alt="" style="width:60px;height:60px"></td>
                     <td>{{$p->category->category_name}}</td>
                     <td><a href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
-                    <td><a href=""><i class="fas fa-trash"></i></a></td>
+                    <td><a data-product-id="{{$p->id}}"><i class="fas fa-trash"></i></a></td>
                 </tr>       
             @endforeach
         </tbody>
