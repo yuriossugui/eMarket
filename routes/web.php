@@ -27,3 +27,4 @@ Route::delete('/admin/product-destroy/{id}', [ProductController::class, 'delete'
 
 // clientes
 Route::resource('/clientes', ClienteController::class);
+Route::get('/admin/product-delete/{id}', [ProductController::class, 'delete']);
