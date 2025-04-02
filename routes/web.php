@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
-
+use App\Http\Controllers\ClienteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,3 +23,8 @@ Route::post('/admin/create-category', [ProductController::class, 'createCategory
 Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);
 Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
 Route::delete('/admin/product-destroy/{id}', [ProductController::class, 'delete']);
+
+
+// clientes
+Route::resource('clientes', ClienteController::class);
+Route::get('/admin/client-index', [ClienteController::class, 'index'])->name('client.index');
