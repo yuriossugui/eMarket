@@ -142,4 +142,14 @@ class ProductController extends Controller
         }
     }
 
+    public function delete(Request $request)
+    {
+        try{
+            Product::findOrFail($request->id)->delete();
+            return redirect('/admin/product-index')->with('msgSuccess','Produto deletado com sucesso !');
+        }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
 }
