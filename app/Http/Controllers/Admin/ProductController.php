@@ -132,15 +132,31 @@ class ProductController extends Controller
 
     public function edit(Request $request)
     {
-        try{
-            
-            Product::findOrFail($request->id)->update($request->all());
+    try {
+        $product = Product::findOrFail($request->id);
 
-            return redirect('/admin/product-index')->with('msgSuccess','Produto editado com sucesso !');
-        }catch(Exception $e){
-            return redirect()->back()->withErrors($e->getMessage());
+        // Atualiza os dados exceto a imagem inicialmente
+        $data = $request->except('image');
+
+        // Se o usuário enviou uma nova imagem
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // Define um nome único para a imagem
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('img/productImages'), $imageName);
+
+            // Adiciona a nova imagem ao array de dados
+            $data['image'] = $imageName;
         }
+
+        // Atualiza os dados no banco de dados
+        $product->update($data);
+
+        return redirect('/admin/product-index')->with('msgSuccess', 'Produto editado com sucesso!');
+    } catch (Exception $e) {
+        return redirect()->back()->withErrors($e->getMessage());
     }
+    }
+
 
     public function delete(Request $request)
     {
