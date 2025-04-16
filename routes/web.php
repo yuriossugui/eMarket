@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\ClienteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +24,5 @@ Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
 Route::delete('/admin/product-destroy', [ProductController::class, 'delete'])->name('destroy.product');
 
 
-// clientes
-Route::resource('/clientes', ClienteController::class);
-Route::get('/admin/product-delete/{id}', [ProductController::class, 'delete']);
+// client routes
+Route::get('/admin/client-index', [ClientController::class, 'index'])->name('client.index');

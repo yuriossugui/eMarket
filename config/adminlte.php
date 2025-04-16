@@ -313,7 +313,13 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'procurar',
+            'text' => 'Procurar',
+        ],
+        ['header' => 'DASHBOARD'],
+        [
+            'text' => 'Dashboard',
+            'url' => 'admin/dashboard',
+            'icon' => 'fas fa-tachometer-alt'
         ],
         ['header' => 'PRODUTOS'],
         [
@@ -339,8 +345,8 @@ return [
         ],
         [
             'text' => 'Clientes',
-            'url' => '/clientes',
-            'icon' => 'fas fa-user',
+            'url' => 'admin/client-index',
+            'icon' => 'fas fa-user-tag',
         ],
         ['header' => 'ESTOQUE'],
         [
