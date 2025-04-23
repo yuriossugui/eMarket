@@ -43,38 +43,30 @@
         <table class="table text-center table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Código</th>
                     <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Estoque</th>
-                    <th>Preço</th>
-                    <th>Imagem</th>
-                    <th>Categoria</th>
+                    <th>E-mail</th>
+                    <th>Número de celular</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><i class="fas fa-pen"></i></td>
-                        <td>
-                            <form action="/admin/product-destroy" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="">
-                                <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>       
-                
+                @foreach($clients as $c)
+                <tr>
+                    <td>{{$c->name}}</td>
+                    <td>{{$c->email}}</td>
+                    <td>{{$c->phone_number}}</td>
+                    <td><a href="/admin/client-show/{{$c->id}}"><button class="btn"><i class="fas fa-pen"></i></button></a></td>
+                    <td>
+                        <form action="/admin/client-destroy" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{$c->id}}">
+                            <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach            
             </tbody>
         </table>
     
@@ -84,51 +76,43 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produto</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cliente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('create.client') }}" method="post">
                     @csrf
                     <div class="row mb-2">
+
                         <div class="col">
                             <label for="name" class="form-label">Nome</label>
                             <input type="text" name="name" id="name" class="form-control">
                         </div>
-                        <div class="col">
-                            <label for="price" class="form-label">Preço</label>
-                            <input type="price" name="price" id="price" class="form-control">
-                        </div>
+
                     </div>
     
                     <div class="row mb-2">
                         <div class="col">
-                            <label for="description" class="form-label">Descrição</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
+                            <label for="phone_number" class="form-label">Número do Celular</label>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control"></textarea>
+                        </div>
+
+                        <div class="col">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" name="password" id="password" class="form-control"></textarea>
                         </div>
                     </div>
-    
+
                     <div class="row mb-2">
+
                         <div class="col">
-                            <label for="category_id" class="form-label">Categoria</label>
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="" selected>Selecione uma opção</option>
-                                
-                                    <option value=""></option>
-                                
-                            </select>
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" name="email" id="email" class="form-control">
                         </div>
+
                     </div>
-    
-                    <div class="row">
-                        <div class="col">
-                            <label for="image" class="form-label">Imagem</label>
-                            <input type="file" name="image" id="image" class="form-control-file">
-                        </div>
-                    </div>
-    
     
                     </div>
                     <div class="modal-footer">

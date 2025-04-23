@@ -26,3 +26,5 @@ Route::delete('/admin/product-destroy', [ProductController::class, 'delete'])->n
 
 // client routes
 Route::get('/admin/client-index', [ClientController::class, 'index'])->name('client.index');
+Route::post('/admin/create-client', [ClientController::class, 'create'])->name('create.client');
+Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');
