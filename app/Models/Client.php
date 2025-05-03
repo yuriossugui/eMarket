@@ -9,7 +9,9 @@ class Client extends Model
     protected $fillable = [
         'name',
         'email',
+        'cpf_numbers',
+        'phone_number',
         'password',
-        'phone_number'
+        'address'
     ];
 }

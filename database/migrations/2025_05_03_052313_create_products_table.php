@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->unique();
+            $table->string('description')->unique();
             $table->integer('stock');
-            $table->float('price');
+            $table->decimal('price',8,2);
             $table->string('image');
-            $table->unsignedBigInteger('category_id')->nullable(); // Alterado para unsignedBigInteger e nullable
-
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('category_id')->nullable(); // Cria a coluna 'category_id' como um inteiro não negativo e permite nulos
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories') // <-- aqui estava faltando
+            ->onDelete('SET NULL');      
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
