@@ -15,16 +15,20 @@ Route::post('/register', [LoginController::class, 'store'])->name('register.stor
 Route::post('/login', [LoginController::class, 'auth'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// product routes
-Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
-Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create.product');
-Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');
-Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);
-Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
-Route::delete('/admin/product-destroy', [ProductController::class, 'delete'])->name('destroy.product');
+
+Route::middleware(['auth'])->group(function () {
+    // product routes
+    Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/admin/create-product', [ProductController::class, 'create'])->name('create.product');
+    Route::post('/admin/create-category', [ProductController::class, 'createCategory'])->name('create.category');
+    Route::get('/admin/product-show/{id}', [ProductController::class, 'show']);
+    Route::put('/admin/product-edit/{id}', [ProductController::class, 'edit']);
+    Route::delete('/admin/product-destroy', [ProductController::class, 'delete'])->name('destroy.product');
+    
+    // client routes
+    Route::get('/admin/client-index', [ClientController::class, 'index'])->name('client.index');
+    Route::post('/admin/create-client', [ClientController::class, 'create'])->name('create.client');
+    Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');
+});
 
 
-// client routes
-Route::get('/admin/client-index', [ClientController::class, 'index'])->name('client.index');
-Route::post('/admin/create-client', [ClientController::class, 'create'])->name('create.client');
-Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');

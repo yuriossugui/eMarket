@@ -9,6 +9,11 @@
 
     <input type="password" name="password" placeholder="password">
 
+    <select name="role" id="role">
+        <option value="user">Usuário</option>
+        <option value="admin">Administrador</option>
+    </select>
+
     <button type="submit">Cadastrar</button>
 
 </form>

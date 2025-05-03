@@ -70,8 +70,8 @@
                         <td>{{$p->stock}}</td>
                         <td>{{$p->price}}</td>
                         <td><img src="{{ asset('img/productImages/'.$p->image) }}" alt="" style="width:60px;height:60px"></td>
-                        <td>{{$p->category->category_name}}</td>
-                        <td><a href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
+                        <td>{{$p->category->name}}</td>
+                        <td><a class="btn" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                         <td>
                             <form action="/admin/product-destroy" method="post">
                                 @csrf
@@ -124,7 +124,7 @@
                             <select name="category_id" id="category_id" class="form-control">
                                 <option value="" selected>Selecione uma opção</option>
                                 @foreach($categories as $c)
-                                    <option value="{{$c->id}}">{{ $c->category_name }}</option>
+                                    <option value="{{$c->id}}">{{ $c->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -150,30 +150,30 @@
     
         <!-- create category form -->
         <div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('create.category') }}" method="post">
-                    @csrf
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label for="name" class="form-label">Nome</label>
-                            <input type="text" name="category_name" id="category_name" class="form-control">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/create-category" method="post">
+                        @csrf
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" name="category_name" id="category_name" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
         </div>
 
     </div>

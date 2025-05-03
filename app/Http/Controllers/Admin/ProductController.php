@@ -8,6 +8,7 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 
 class ProductController extends Controller
@@ -91,20 +92,22 @@ class ProductController extends Controller
         try{
 
             $validated = $request->validate(
-            [
-                'category_name'=>'required|min:2|max:50',  
-            ],
-            [
-                'category_name.required' => 'O campo nome é obrigatório.',
-                'category_name.min' => 'O nome deve ter pelo menos 2 caracteres.',
-                'category_name.max' => 'O nome não pode ter mais de 50 caracteres.',
-            ]
+                [
+                    'category_name' => 'required|min:2|max:50',
+                ],
+                [
+                    'category_name.required' => 'O campo nome é obrigatório.',
+                    'category_name.min' => 'O nome deve ter pelo menos 2 caracteres.',
+                    'category_name.max' => 'O nome não pode ter mais de 50 caracteres.',
+                ]
             );
-    
+
             $categoryModel = new Category();
-    
-            $categoryModel->category_name = $validated['category_name'];
-    
+
+            $categoryModel->name = $validated['category_name'];
+
+            $categoryModel->slug = Str::slug($validated['category_name']);
+
             $categoryModel->save();
             
             return redirect('/admin/product-index')->with('msgSuccess','Categoria cadastrada com sucesso');
@@ -113,6 +116,7 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
             Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }catch(Exception $e){
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
             Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
         }
 

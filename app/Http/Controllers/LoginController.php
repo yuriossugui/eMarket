@@ -28,6 +28,7 @@ class LoginController extends Controller
         $userModel->name = $request['name'];
         $userModel->email = $request['email'];
         $userModel->password = $request['password'];
+        $userModel->role = $request['role'];
 
         $userModel->save();
 
