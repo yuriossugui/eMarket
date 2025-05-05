@@ -45,7 +45,9 @@
                 <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
-                    <th>Número de celular</th>
+                    <th>CPF</th>
+                    <th>Celular</th>
+                    <th>Ver</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
@@ -55,8 +57,10 @@
                 <tr>
                     <td>{{$c->name}}</td>
                     <td>{{$c->email}}</td>
+                    <td>{{$c->cpf_numbers}}</td>
                     <td>{{$c->phone_number}}</td>
-                    <td><a href="/admin/client-show/{{$c->id}}"><button class="btn"><i class="fas fa-pen"></i></button></a></td>
+                    <td><a href="/admin/client-details/{{$c->id}}"><i class="fas fa-eye"></i></a></td>
+                    <td><a class="btn btn" href="/admin/client-show/{{$c->id}}"><i class="fas fa-pen"></i></a></td>
                     <td>
                         <form action="/admin/client-destroy" method="post">
                             @csrf
@@ -71,58 +75,91 @@
         </table>
     
     
-        <!-- create product form -->
-        <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cliente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+    <!-- Modal de Cadastro de Cliente -->
+    <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Cliente</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
                 <form action="{{ route('create.client') }}" method="post">
                     @csrf
-                    <div class="row mb-2">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Nome</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Digite o nome completo" required>
+                                </div>
+                            </div>
 
-                        <div class="col">
-                            <label for="name" class="form-label">Nome</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <div class="form-group col-md-6">
+                                <label for="email">E-mail</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
+                                </div>
+                            </div>
                         </div>
 
-                    </div>
-    
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label for="phone_number" class="form-label">Número do Celular</label>
-                            <input type="text" name="phone_number" id="phone_number" class="form-control"></textarea>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="cpf_numbers">CPF</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                    </div>
+                                    <input type="text" name="cpf_numbers" id="cpf_numbers" class="form-control" placeholder="000.000.000-00" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="phone_number">Número do Celular</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="(00) 00000-0000" required>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col">
-                            <label for="password" class="form-label">Senha</label>
-                            <input type="password" name="password" id="password" class="form-control"></textarea>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="password">Senha</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" name="password" id="password" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="address">Endereço</label>
+                                <textarea class="form-control" name="address" id="address" rows="2" placeholder="Rua, número, bairro..." required></textarea>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row mb-2">
-
-                        <div class="col">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input type="email" name="email" id="email" class="form-control">
-                        </div>
-
-                    </div>
-    
-                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                 </form>
             </div>
         </div>
-        </div>
+    </div>
+
 
 
     </div>

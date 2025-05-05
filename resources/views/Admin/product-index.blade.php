@@ -87,94 +87,101 @@
     
         {{ $products->links('pagination::bootstrap-5') }}
     
-        <!-- create product form -->
-        <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    <!-- Modal de Cadastro de Produto -->
+    <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-sm">
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produto</h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="modal-body">
-                <form action="{{ route('create.product') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label for="name" class="form-label">Nome</label>
-                            <input type="text" name="name" id="name" class="form-control">
-                        </div>
-                        <div class="col">
-                            <label for="price" class="form-label">Preço</label>
-                            <input type="price" name="price" id="price" class="form-control">
-                        </div>
-                    </div>
-    
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label for="description" class="form-label">Descrição</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
-                        </div>
-                    </div>
-    
-                    <div class="row mb-2">
-                        <div class="col">
-                            <label for="category_id" class="form-label">Categoria</label>
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option value="" selected>Selecione uma opção</option>
-                                @foreach($categories as $c)
-                                    <option value="{{$c->id}}">{{ $c->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-    
-                    <div class="row">
-                        <div class="col">
-                            <label for="image" class="form-label">Imagem</label>
-                            <input type="file" name="image" id="image" class="form-control-file">
-                        </div>
-                    </div>
-    
-    
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        </div>
-    
-        <!-- create category form -->
-        <div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="name">Nome do Produto</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Digite o nome do produto" required>
                 </div>
-                <div class="modal-body">
-                    <form action="/admin/create-category" method="post">
-                        @csrf
-                        <div class="row mb-2">
-                            <div class="col">
-                                <label for="name" class="form-label">Nome</label>
-                                <input type="text" name="category_name" id="category_name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </div>
-                    </form>
+                <div class="form-group col-md-6">
+                <label for="price">Preço</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="number" name="price" id="price" class="form-control" placeholder="0,00" step="0.01" required>
+                </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea name="description" id="description" class="form-control" rows="3" placeholder="Descreva o produto..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select name="category_id" id="category_id" class="form-control" required>
+                <option value="" selected disabled>Selecione uma categoria</option>
+                @foreach($categories as $c)
+                    <option value="{{ $c->id }}">{{ $c->name }}</option>
+                @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Imagem do Produto</label>
+                <input type="file" name="image" id="image" class="form-control-file" accept="image/*">
+            </div>
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
         </div>
+    </div>
+    </div>
+
+    
+    <!-- Modal de Cadastro de Categoria -->
+    <div class="modal fade" id="createCategoryForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-sm">
+        <div class="modal-header bg-info text-white">
+            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Categoria</h5>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form action="/admin/create-category" method="post">
+            @csrf
+            <div class="modal-body">
+            <div class="form-group">
+                <label for="category_name">Nome da Categoria</label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                </div>
+                <input type="text" name="category_name" id="category_name" class="form-control" placeholder="Ex: Eletrônicos" required>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-info text-white">Cadastrar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
 
     </div>
 
