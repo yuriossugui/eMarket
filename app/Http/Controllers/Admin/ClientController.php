@@ -70,4 +70,25 @@ class ClientController extends Controller
         return view('Admin.client-show',['client'=>$client]); 
     }
 
+    public function update(Request $request, $id) // Use 'update' para a ação de atualizar
+    {
+        // 1. Validação dos dados recebidos, ignorando o email e CPF do cliente atual
+        $request->validate([
+            'name'          => 'required|min:3|max:255',
+            'email'         => 'required|email|unique:clients,email,' . $id, // Ignora o email do cliente com este ID
+            'cpf_numbers'   => 'required|digits:11|unique:clients,cpf_numbers,' . $id, // Ignora o CPF do cliente com este ID
+            'phone_number'  => 'required|min:11|max:25',
+            'address'       => 'required|min:5|max:255',
+        ]);
+
+        // 2. Encontra o cliente que você quer atualizar usando o ID
+        $client = Client::findOrFail($id);
+
+        // 3. Atualiza os atributos do cliente com os dados recebidos do formulário
+        $client->update($request->all()); // Passa todos os dados validados para o método update do Model
+
+        // 4. Redireciona o usuário para a página de listagem de clientes com uma mensagem de sucesso
+        return redirect('admin/client-index')->with('msgSuccess', 'Cliente atualizado com sucesso!');
+    }
+
 }

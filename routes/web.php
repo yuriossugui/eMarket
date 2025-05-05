@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/client-index', [ClientController::class, 'index'])->name('client.index');
     Route::post('/admin/create-client', [ClientController::class, 'create'])->name('create.client');
     Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');
+    Route::put('/admin/client-update/{id}', [ClientController::class, 'update']);
 });
 
 
