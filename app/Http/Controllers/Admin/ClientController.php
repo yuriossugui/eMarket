@@ -91,4 +91,10 @@ class ClientController extends Controller
         return redirect('admin/client-index')->with('msgSuccess', 'Cliente atualizado com sucesso!');
     }
 
+    public function delete(Request $request)
+    {
+        Client::findOrFail($request->id)->delete();
+        return redirect('admin/client-index')->with('msgSuccess', 'Cliente excluido com sucesso!');
+    }
+
 }

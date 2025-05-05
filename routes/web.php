@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/create-client', [ClientController::class, 'create'])->name('create.client');
     Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');
     Route::put('/admin/client-update/{id}', [ClientController::class, 'update']);
+    Route::delete('/admin/client-delete', [ClientController::class, 'delete'])->name('client.delete');
 });
 
 
