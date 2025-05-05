@@ -59,7 +59,7 @@
                     <td>{{$c->email}}</td>
                     <td>{{$c->cpf_numbers}}</td>
                     <td>{{$c->phone_number}}</td>
-                    <td><a href="/admin/client-details/{{$c->id}}"><i class="fas fa-eye"></i></a></td>
+                    <td><a class="btn btn" href="/admin/client-details/{{$c->id}}"><i class="fas fa-eye"></i></a></td>
                     <td><a class="btn btn" href="/admin/client-show/{{$c->id}}"><i class="fas fa-pen"></i></a></td>
                     <td>
                         <form action="/admin/client-destroy" method="post">
