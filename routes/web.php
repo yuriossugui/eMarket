@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
@@ -31,4 +32,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/client-show/{id}', [ClientController::class, 'show'])->name('client.show');
     Route::put('/admin/client-update/{id}', [ClientController::class, 'update']);
     Route::delete('/admin/client-delete', [ClientController::class, 'delete'])->name('client.delete');
+
+    // category routes
+    Route::get('/admin/category-index', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/admin/category-show/{id}', [CategoryController::class, 'show'])->name('category.show');
+    Route::put('/admin/category-update/{id}', [CategoryController::class, 'update']);
+    Route::delete('/admin/category-delete', [CategoryController::class, 'delete'])->name('category.delete');
 });
