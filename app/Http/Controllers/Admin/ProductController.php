@@ -54,8 +54,8 @@ class ProductController extends Controller
 
             $product = new Product();
 
-            $product->name = $validated['name'];
-            $product->description = $validated['description'];
+            $product->name = strtoupper($validated['name']);
+            $product->description = strtoupper($validated['description']);
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
             

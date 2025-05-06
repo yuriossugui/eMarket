@@ -327,16 +327,13 @@ return [
             'url' => 'admin/product-index',
             'icon' => 'fas fa-shopping-cart',
         ],
-        [
-            'text' => 'Marca',
-            'url' => 'admin/brand-index',
-            'icon' => 'fas fa-tag',
-        ],
+
         [
             'text' => 'Categoria',
             'url' => 'admin/category-index',
             'icon' => 'fas fa-folder',
         ],
+        
         ['header' => 'USUÁRIOS'],
         [
             'text' => 'Usuário',
@@ -348,6 +345,7 @@ return [
             'url' => 'admin/client-index',
             'icon' => 'fas fa-user-tag',
         ],
+        
         ['header' => 'ESTOQUE'],
         [
             'text' => 'Estoque',

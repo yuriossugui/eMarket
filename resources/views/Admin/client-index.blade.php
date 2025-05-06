@@ -62,7 +62,7 @@
                     <td><a class="btn btn" href="/admin/client-details/{{$c->id}}"><i class="fas fa-eye"></i></a></td>
                     <td><a class="btn btn" href="/admin/client-show/{{$c->id}}"><i class="fas fa-pen"></i></a></td>
                     <td>
-                        <form action="/admin/client-delete" method="post">
+                        <form action="/admin/client-delete" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{$c->id}}">

@@ -32,5 +32,3 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/client-update/{id}', [ClientController::class, 'update']);
     Route::delete('/admin/client-delete', [ClientController::class, 'delete'])->name('client.delete');
 });
-
-

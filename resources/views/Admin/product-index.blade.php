@@ -73,7 +73,7 @@
                         <td>{{$p->category->name}}</td>
                         <td><a class="btn" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                         <td>
-                            <form action="/admin/product-destroy" method="post">
+                            <form action="/admin/product-destroy" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{$p->id}}">
