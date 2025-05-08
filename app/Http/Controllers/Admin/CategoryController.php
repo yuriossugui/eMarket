@@ -61,7 +61,20 @@ class CategoryController extends Controller
 
     public function delete(Request $request)
     {
-        Category::findOrFail($request->id)->delete();
-        return redirect('admin/category-index')->with('msgSuccess', 'Categoria excluida com sucesso!');
+        try{
+            
+            $category = Category::findOrFail($request->id);
+            
+            if($category->products()->exists()){
+                return redirect('admin/category-index')->with('msgError','Esta categoria tem produtos associados !');
+            }else{
+                $category->delete();
+                return redirect('admin/category-index')->with('msgSuccess', 'Categoria excluida com sucesso!');
+            }
+            
+        }catch(\Illuminate\Validation\ValidationException $e){
+            return redirect()->back()->withErrors($e->errors())->withInput();
+            Log::error('Erro: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+        }
     }
 }

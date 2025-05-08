@@ -16,20 +16,9 @@
 
     @if(session('msgError') != null )
         <div class="alert alert-danger mt-2">
-            {{ session('msgSuccess') }}
+            {{ session('msgError') }}
         </div>
     @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger mt-2">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    
 
     <div id="mainContainer" class="card p-2 m-2">
     
