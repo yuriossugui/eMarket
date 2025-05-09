@@ -1,19 +1,41 @@
-<h1>Register form</h1>
+@extends('layouts.main')
 
-<form action="" method="post">
-    @csrf
+@section('css')
+    <link rel="stylesheet" href="{{asset('assets/css/register.css')}}">
+@endsection
 
-    <input type="text" name="name" placeholder="name">
+@section('content')
+    <div class="card">
+    <h3 class="text-center mb-4">Formulário de Cadastro</h3>
 
-    <input type="email" name="email" placeholder="email">
+    <form action="" method="post">
+        @csrf
 
-    <input type="password" name="password" placeholder="password">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" name="name" class="form-control" placeholder="Digite seu nome" required>
+        </div>
 
-    <select name="role" id="role">
-        <option value="user">Usuário</option>
-        <option value="admin">Administrador</option>
-    </select>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" class="form-control" placeholder="Digite seu e-mail" required>
+        </div>
 
-    <button type="submit">Cadastrar</button>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
+        </div>
 
-</form>
+        <div class="form-group">
+            <label for="role">Perfil</label>
+            <select name="role" id="role" class="form-control" required>
+                <option value="user">Usuário</option>
+                <option value="admin">Administrador</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+    </form>
+    </div>
+
+@endsection
