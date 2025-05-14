@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        $products = Product::with('category')->paginate(5);
+        $products = Product::with('category')->get();
 
         return view('Admin.product-index',['categories'=>$categories, 'products'=>$products]); 
     }

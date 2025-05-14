@@ -3,11 +3,8 @@
 @section('title', 'Produto')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-@endsection
-
-@section('js')
-    <script src="{{ asset('js/product-index.js') }}"></script>
+    <!-- <link rel="stylesheet" href="{{ asset('css/main.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
 @endsection
 
 @section('content') 
@@ -47,7 +44,7 @@
             </button>
         </div>
     
-        <table class="table text-center table-bordered table-hover">
+        <table class="table text-center table-bordered table-hover" id="products">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -71,7 +68,7 @@
                         <td>{{$p->price}}</td>
                         <td><img src="{{ asset('img/productImages/'.$p->image) }}" alt="" style="width:60px;height:60px"></td>
                         <td>{{$p->category->name}}</td>
-                        <td><a class="btn" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
+                        <td><a class="btn btn-sm btn-warning" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                         <td>
                             <form action="/admin/product-destroy" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
                                 @csrf
@@ -84,8 +81,6 @@
                 @endforeach
             </tbody>
         </table>
-    
-        {{ $products->links('pagination::bootstrap-5') }}
     
     <!-- Modal de Cadastro de Produto -->
     <div class="modal fade" id="createProductForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,5 +180,10 @@
 
     </div>
 
+
+    @section('js')
+        <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/product-index.js') }}"></script>
+    @endsection
 
 @endsection
