@@ -5,6 +5,7 @@
 @section('css')
     <!-- <link rel="stylesheet" href="{{ asset('css/main.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/product-index.css') }}">
 @endsection
 
 @section('content') 
@@ -74,7 +75,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{$p->id}}">
-                                <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>       
