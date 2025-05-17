@@ -53,7 +53,7 @@
                     <th>Descrição</th>
                     <th>Estoque</th>
                     <th>Preço</th>
-                    <th>Imagem</th>
+                    <th>Data do Cadastro</th>
                     <th>Categoria</th>
                     <th>Editar</th>
                     <th>Excluir</th>
@@ -67,7 +67,7 @@
                         <td>{{$p->description}}</td>
                         <td>{{$p->stock}}</td>
                         <td>{{$p->price}}</td>
-                        <td><img src="{{ asset('img/productImages/'.$p->image) }}" alt="" style="width:60px;height:60px"></td>
+                        <td>{{$p->created_at}}</td>
                         <td>{{$p->category->name}}</td>
                         <td><a class="btn btn-sm btn-warning" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                         <td>

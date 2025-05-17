@@ -8,6 +8,28 @@ $(document).ready(function () {
         return dataHoraFormatada;
     }
 
+    function formatarMoeda(valor) {
+        if (valor === null || valor === undefined) {
+          return ''; // Ou outra representação para valores vazios
+        }
+        const valorNumerico = typeof valor === 'string' ? parseFloat(valor) : valor;
+        return 'R$ ' + valorNumerico.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function formatarDataISO(dataISO) {
+        if (!dataISO) {
+          return ''; // Ou outra representação para datas vazias
+        }
+        const date = new Date(dataISO);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    }
+
     $('#products').DataTable({
         dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>rtip",
         language: {
@@ -40,6 +62,28 @@ $(document).ready(function () {
                     columns:':visible'
                 },
                 title:`Lista de Produtos ${exibirDataHoraAtual()}`
+            }
+        ],
+        columnDefs:[
+            {
+                targets: 4,
+                render: function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                      // Formata para moeda Real (R$)
+                      return formatarMoeda(data);
+                    }
+                    return data; // Mantém o valor original para ordenação e outros tipos
+                }
+            },
+            {
+                targets: 5,
+                render: function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        // Formata para data padrao BR
+                        return formatarDataISO(data);
+                    }
+                    return data;
+                }
             }
         ],
         info:false,
