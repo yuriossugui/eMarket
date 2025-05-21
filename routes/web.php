@@ -39,3 +39,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/category-update/{id}', [CategoryController::class, 'update']);
     Route::delete('/admin/category-delete', [CategoryController::class, 'delete'])->name('category.delete');
 });
+

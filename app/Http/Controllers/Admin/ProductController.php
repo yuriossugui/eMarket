@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-
 class ProductController extends Controller
 {
     public function index()
@@ -54,8 +53,8 @@ class ProductController extends Controller
 
             $product = new Product();
 
-            $product->name = strtoupper($validated['name']);
-            $product->description = strtoupper($validated['description']);
+            $product->name = mb_strtoupper($validated['name'], 'UTF-8');
+            $product->description = mb_strtoupper($validated['description'], 'UTF-8');
             $product->price = $validated['price'];
             $product->category_id = $validated['category_id'];
             
@@ -93,18 +92,19 @@ class ProductController extends Controller
 
             $validated = $request->validate(
                 [
-                    'category_name' => 'required|min:2|max:50',
+                    'category_name' => 'required|min:2|max:50|unique:categories,name',
                 ],
                 [
                     'category_name.required' => 'O campo nome é obrigatório.',
                     'category_name.min' => 'O nome deve ter pelo menos 2 caracteres.',
                     'category_name.max' => 'O nome não pode ter mais de 50 caracteres.',
+                    'category_name.unique' => 'Este nome de categoria já está em uso.',
                 ]
             );
 
             $categoryModel = new Category();
 
-            $categoryModel->name = $validated['category_name'];
+            $categoryModel->name = mb_strtoupper($validated['category_name'], 'UTF-8');
 
             $categoryModel->slug = Str::slug($validated['category_name']);
 
@@ -137,7 +137,7 @@ class ProductController extends Controller
 
     public function edit(Request $request)
     {
-    try {
+        try {
         $product = Product::findOrFail($request->id);
 
         // Atualiza os dados exceto a imagem inicialmente
@@ -157,11 +157,10 @@ class ProductController extends Controller
         $product->update($data);
 
         return redirect('/admin/product-index')->with('msgSuccess', 'Produto editado com sucesso!');
-    } catch (Exception $e) {
+        } catch (Exception $e) {
         return redirect()->back()->withErrors($e->getMessage());
+        }
     }
-    }
-
 
     public function delete(Request $request)
     {
