@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Store.index');
 })->name('home');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

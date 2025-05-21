@@ -15,10 +15,10 @@
                     <a class="nav-link" href="">Loja</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{  }}">Categorias</a>
+                    <a class="nav-link" href="">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{  }}">Produtos</a>
+                    <a class="nav-link" href="">Produtos</a>
                 </li>
             </ul>
 
@@ -29,8 +29,8 @@
                         Perfil
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="perfilDropdown">
-                        <a class="dropdown-item" href="{{  }}">Pedidos</a>
-                        <a class="dropdown-item" href="{{  }}">Informações</a>
+                        <a class="dropdown-item" href="">Pedidos</a>
+                        <a class="dropdown-item" href="">Informações</a>
                     </div>
                 </li>
             </ul>
