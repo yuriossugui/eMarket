@@ -5,10 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Store\StoreController;
 
-Route::get('/', function () {
-    return view('Store.index');
-})->name('home');
+Route::get('/', [StoreController::class, 'index'])->name('home');
+
+// Route::get('/', function () {
+//     return view('Store.index');
+// })->name('home');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');

@@ -10,8 +10,9 @@ class StoreController extends Controller
 {
     function index(Request $request)
     {
+        
         $products = Product::with('category')->get();
-
+        
         return view('Store.index',['products'=>$products]);
     }
 }
