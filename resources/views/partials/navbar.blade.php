@@ -29,6 +29,11 @@
                         Perfil
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="perfilDropdown">
+                        @if(auth()->check())
+                            <p class="dropdown-item">Bem vindo, {{ auth()->user()->name }} </p>
+                        @else
+                            <p class="dropdown-item">Nao logado</p>
+                        @endif
                         <a class="dropdown-item" href="">Pedidos</a>
                         <a class="dropdown-item" href="">Informações</a>
                     </div>

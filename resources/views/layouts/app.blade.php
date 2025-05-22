@@ -9,19 +9,19 @@
     <!-- Estilos customizados -->
     @stack('styles')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Barra de Navegação -->
     @include('partials.navbar')
 
     <!-- Conteúdo Principal -->
-    <main class="container my-4">
+    <main class="container my-4">   
         @yield('content')
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-light text-center py-3">
-        <p class="mb-0">&copy; {{ date('Y') }} Minha Loja</p>
+    <footer class="bg-light text-center py-3 mt-auto">
+        <p class="mb-0">&copy; {{ date('Y') }} eMarket</p>
     </footer>
 
     <!-- Bootstrap JS e dependências -->
