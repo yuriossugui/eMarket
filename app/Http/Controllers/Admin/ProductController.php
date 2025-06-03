@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Auth;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\StockEntry;
+use App\Models\StockOutput;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -172,6 +175,98 @@ class ProductController extends Controller
         }catch(Exception $e){
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function inbound(Request $request)
+    {
+        $products = Product::all();
+
+        $entries = StockEntry::with(['product','user'])->get();
+
+        return view('Admin.movement-inbound',['products'=>$products,'entries'=>$entries]);
+    }
+
+    public function entry(Request $request)
+    {
+
+        $validated = $request->validate(
+            [
+                'product_id' => 'required|integer',
+                'quantity' => 'required|integer|min:1'
+            ],
+            [
+                'product_id.required' => 'O produto é obrigatório !',
+                'product_id.integer' => 'Produto inválido',
+                'product_id.min' => 'Insira uma quantidade válida',
+                'quantity.required' => 'A quantidade é obrigatória !',
+                'quantity.integer' => 'Quantidade inválida'
+            ]
+        );
+    
+        // Corrigido o nome do método: findOrFail
+        $product = Product::findOrFail($request->product_id);
+    
+        // Soma a quantidade recebida ao estoque atual
+        $product->stock += $request->quantity;
+
+        // Salva a atualização
+        $product->save();
+
+        $userId = auth()->user()->id;
+
+        StockEntry::create([
+            'product_id' => $product->id,
+            'user_id' => $userId,
+            'quantity' => $request->quantity,
+        ]);
+    
+        return redirect('/admin/inbound')->with('msgSuccess','Quantidade inserida com sucesso !');
+    }
+
+    public function outbound(Request $request)
+    {
+        $products = Product::all();
+
+        $stock_outputs = StockOutput::with(['product','user'])->get();
+
+        return view('Admin.movement-outbound',['products'=>$products,'outputs'=>$stock_outputs]);
+    }
+
+    public function output(Request $request)
+    {
+        $validated = $request->validate(
+            [
+            'product_id' => 'required|integer|exists:products,id',
+            'quantity' => 'required|integer|min:1|max:' . Product::findOrFail($request->product_id)->stock
+            ],
+            [
+            'product_id.required' => 'O produto é obrigatório !',
+            'product_id.integer' => 'Produto inválido',
+            'product_id.exists' => 'O produto selecionado não existe.',
+            'quantity.required' => 'A quantidade é obrigatória !',
+            'quantity.integer' => 'Quantidade inválida',
+            'quantity.max' => 'A quantidade não pode ser superior ao estoque disponível.'
+            ]
+        );
+
+        $product = Product::findOrFail($request->product_id);
+    
+        // Soma a quantidade recebida ao estoque atual
+        $product->stock -= $validated['quantity'];
+
+        // Salva a atualização
+        $product->save();
+
+        $userId = auth()->user()->id;
+        
+        StockOutput::create([
+            'product_id' => $product->id,
+            'user_id' => $userId,
+            'quantity' => $request->quantity,
+        ]);
+
+        return redirect('/admin/outbound')->with('msgSuccess','Quantidade subtraída com sucesso !');
+
     }
 
 }

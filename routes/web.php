@@ -7,11 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
 
-Route::get('/', [StoreController::class, 'index'])->name('home');
-
-// Route::get('/', function () {
-//     return view('Store.index');
-// })->name('home');
+Route::get('/', [StoreController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
@@ -41,5 +37,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/category-show/{id}', [CategoryController::class, 'show'])->name('category.show');
     Route::put('/admin/category-update/{id}', [CategoryController::class, 'update']);
     Route::delete('/admin/category-delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+    // movement
+    Route::get('/admin/inbound', [ProductController::class, 'inbound'])->name('movement.inbound');
+    Route::post('/admin/register-entry', [ProductController::class, 'entry']);
+    Route::get('/admin/outbound', [ProductController::class, 'outbound'])->name('movement.outbound');
+    Route::post('/admin/register-output', [ProductController::class, 'output']);
+
 });
 
