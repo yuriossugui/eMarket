@@ -269,4 +269,11 @@ class ProductController extends Controller
 
     }
 
+    public function storage(Request $request)
+    {
+        $products = Product::with('category')->get();
+
+        return view('Admin.storage',['products'=>$products]);
+    }
+
 }

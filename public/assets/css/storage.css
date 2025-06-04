@@ -1,0 +1,8 @@
+.dt-search{
+    text-align: right;
+}
+
+.dt-paging .pagination {
+    justify-content: flex-end; /* Alinha os itens à direita */
+    padding-top: 10px;
+}

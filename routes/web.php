@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
 
@@ -44,5 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/outbound', [ProductController::class, 'outbound'])->name('movement.outbound');
     Route::post('/admin/register-output', [ProductController::class, 'output']);
 
+    // stock
+    Route::get('/admin/storage-index', [ProductController::class, 'storage'])->name('storage.index');
+
+    // dashboard
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
