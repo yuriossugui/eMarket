@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
 
@@ -50,5 +51,9 @@ Route::middleware(['auth'])->group(function () {
 
     // dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // client 
+    Route::get('/admin/user-index', [UserController::class, 'index'])->name('user.index');
+    Route::get('/admin/user-show/{id}', [UserController::class, 'show'])->name('user.show');
 });
 

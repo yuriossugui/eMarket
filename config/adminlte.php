@@ -337,7 +337,7 @@ return [
         ['header' => 'USUÁRIOS'],
         [
             'text' => 'Usuário',
-            'url' => 'admin/user-index',
+            'url' => '/admin/user-index',
             'icon' => 'fas fa-user',
         ],
         [
