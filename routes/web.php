@@ -55,5 +55,7 @@ Route::middleware(['auth'])->group(function () {
     // client 
     Route::get('/admin/user-index', [UserController::class, 'index'])->name('user.index');
     Route::get('/admin/user-show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::put('/admin/user-update/{id}', [UserController::class, 'update']);
+    Route::delete('/admin/user-destroy', [UserController::class, 'delete'])->name('user.delete');
 });
 

@@ -51,6 +51,7 @@
                 <th>E-mail</th>
                 <th>Permissão</th>
                 <th>Editar</th>
+                <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +60,15 @@
                     <td>{{$u->name}}</td>
                     <td>{{$u->email}}</td>
                     <td>{{$u->role}}</td>
-                    <td><a class="btn btn-sm btn-warning" href="admin/user-show/{{$u->id}}"><i class="fas fa-pen"></i></a></td>
+                    <td><a class="btn btn-sm btn-warning" href="{{ route('user.show', $u->id) }}"><i class="fas fa-pen"></i></a></td>
+                    <td>
+                        <form action="/admin/user-destroy" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este usuario?');">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{$u->id}}">
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
