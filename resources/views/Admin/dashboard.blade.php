@@ -38,6 +38,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="col mb-4">
+                <div class="card shadow">
+                    <div class="card-header bg-warning text-white">
+                        Usuários por Cargo
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <canvas id="roleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </div>
 </div>
 
@@ -90,6 +103,40 @@
                 responsive: true,
                 scales: {
                     y: { beginAtZero: true }
+                }
+            }
+        });
+
+
+        const clients = @json($clients);
+
+        const roleLabels = clients.map(c => c.role);
+        const roleData = clients.map(c => c.total);
+
+        const roleChart = new Chart(document.getElementById('roleChart'), {
+            type: 'pie',
+            data: {
+                labels: roleLabels,
+                datasets: [{
+                    label: 'Usuários por Cargo',
+                    data: roleData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
                 }
             }
         });

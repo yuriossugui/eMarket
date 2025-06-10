@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
 
-Route::get('/', [StoreController::class, 'index'])->name('home')->middleware('auth');
+// Route::get('/', [StoreController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/', [ProductController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
