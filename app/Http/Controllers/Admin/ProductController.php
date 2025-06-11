@@ -177,14 +177,32 @@ class ProductController extends Controller
         }
     }
 
+    // public function inbound(Request $request)
+    // {
+    //     $products = Product::all();
+
+    //     $entries = StockEntry::with(['product','user'])->get();
+
+    //     return view('Admin.movement-inbound',['products'=>$products,'entries'=>$entries]);
+    // }
+
     public function inbound(Request $request)
     {
         $products = Product::all();
-
-        $entries = StockEntry::with(['product','user'])->get();
-
-        return view('Admin.movement-inbound',['products'=>$products,'entries'=>$entries]);
+        
+        $entries = StockEntry::with(['product', 'user'])->get();
+        
+        // Filtra apenas os registros onde 'product' e 'user' não são null
+        $entries = $entries->filter(function ($entry) {
+            return $entry->product !== null && $entry->user !== null;
+        });
+    
+        return view('Admin.movement-inbound', [
+            'products' => $products,
+            'entries' => $entries
+        ]);
     }
+
 
     public function entry(Request $request)
     {

@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
             $request->validate([
                 'name' => 'required|min:3|max:255',
-                'slug' => 'required|min:3|max:255|unique'
+                'slug' => 'required|min:3|max:255'
             ]);
 
             $category = Category::findOrFail($request->id);

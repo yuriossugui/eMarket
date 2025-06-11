@@ -3,7 +3,9 @@
 @section('title', 'Clientes')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/main.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/clients.css') }}">
 @endsection
 
 @section('content') 
@@ -40,14 +42,13 @@
             </button>
         </div>
     
-        <table class="table text-center table-bordered table-hover">
+        <table class="table text-center table-bordered table-hover" id="table">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>CPF</th>
                     <th>Celular</th>
-                    <th>Ver</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
@@ -59,14 +60,13 @@
                     <td>{{$c->email}}</td>
                     <td>{{$c->cpf_numbers}}</td>
                     <td>{{$c->phone_number}}</td>
-                    <td><a class="btn btn" href="/admin/client-details/{{$c->id}}"><i class="fas fa-eye"></i></a></td>
-                    <td><a class="btn btn" href="/admin/client-show/{{$c->id}}"><i class="fas fa-pen"></i></a></td>
+                    <td><a class="btn btn-sm btn-warning" href="/admin/client-show/{{$c->id}}"><i class="fas fa-pen"></i></a></td>
                     <td>
                         <form action="/admin/client-delete" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="id" value="{{$c->id}}">
-                            <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -164,5 +164,9 @@
 
     </div>
 
+    @section('js')
+        <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/client.js') }}"></script>
+    @endsection
 
 @endsection
