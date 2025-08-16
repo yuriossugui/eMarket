@@ -132,6 +132,7 @@ class ProductController extends Controller
 
             $product = Product::with('category')->findOrFail($request->id);
 
+
             return view('Admin.product-show',['product'=>$product, 'categories'=>$categories]); 
         }catch(Exception $e){
             return redirect()->back()->withErrors($e->getMessage());
@@ -176,15 +177,6 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
-
-    // public function inbound(Request $request)
-    // {
-    //     $products = Product::all();
-
-    //     $entries = StockEntry::with(['product','user'])->get();
-
-    //     return view('Admin.movement-inbound',['products'=>$products,'entries'=>$entries]);
-    // }
 
     public function inbound(Request $request)
     {

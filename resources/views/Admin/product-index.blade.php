@@ -69,7 +69,7 @@
                         <td>{{$p->price}}</td>
                         <td>{{$p->created_at}}</td>
                         <td>{{$p->category->name}}</td>
-                        <td><a class="btn btn-sm btn-warning" href="product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
+                        <td><a class="btn btn-sm btn-warning" href="/admin/product-show/{{$p->id}}"><i class="fas fa-pen"></i></a></td>
                         <td>
                             <form action="/admin/product-destroy" method="post" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
                                 @csrf
