@@ -84,8 +84,14 @@ class ClientController extends Controller
         // 2. Encontra o cliente que você quer atualizar usando o ID
         $client = Client::findOrFail($id);
 
+        $data = $request->all();
+
+        if (isset($data['name'])) {
+            $data['name'] = strtoupper($data['name']);
+        }
+
         // 3. Atualiza os atributos do cliente com os dados recebidos do formulário
-        $client->update($request->all()); // Passa todos os dados validados para o método update do Model
+        $client->update($data); // Passa todos os dados validados para o método update do Model
 
         // 4. Redireciona o usuário para a página de listagem de clientes com uma mensagem de sucesso
         return redirect('admin/client-index')->with('msgSuccess', 'Cliente atualizado com sucesso!');

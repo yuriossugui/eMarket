@@ -9,8 +9,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
 
-// Route::get('/', [StoreController::class, 'index'])->name('home')->middleware('auth');
-
 Route::get('/', [ProductController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -61,3 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user-destroy', [UserController::class, 'delete'])->name('user.delete');
 });
 
+// ROTAS API
+
+Route::get('/api/hello', function () {
+    return response()->json(['message' => 'Hello API!']);
+});

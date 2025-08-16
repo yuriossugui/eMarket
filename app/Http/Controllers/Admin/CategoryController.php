@@ -45,7 +45,13 @@ class CategoryController extends Controller
 
             $category = Category::findOrFail($request->id);
 
-            $category->update($request->all());
+            $data = $request->all();
+
+            if (isset($data['name'])) {
+                $data['name'] = strtoupper($data['name']);
+            }
+
+            $category->update($data);
 
             return redirect('admin/category-index')->with('msgSuccess', 'Categoria atualizada com sucesso!');
 

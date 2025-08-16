@@ -147,6 +147,10 @@ class ProductController extends Controller
         // Atualiza os dados exceto a imagem inicialmente
         $data = $request->except('image');
 
+        if (isset($data['description'])) {
+            $data['description'] = strtoupper($data['description']);
+        }
+
         // Se o usuário enviou uma nova imagem
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Define um nome único para a imagem
@@ -182,7 +186,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
         
-        $entries = StockEntry::with(['product', 'user'])->get();
+        $entries = StockEntry::with(['product', 'user'])->orderBy('created_at','desc')->get();
         
         // Filtra apenas os registros onde 'product' e 'user' não são null
         $entries = $entries->filter(function ($entry) {
@@ -194,7 +198,6 @@ class ProductController extends Controller
             'entries' => $entries
         ]);
     }
-
 
     public function entry(Request $request)
     {
