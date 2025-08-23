@@ -11,15 +11,21 @@ class StoreController extends Controller
 {
     public function index(Request $request)
     {
+        // Remove "R$" and convert to float
+        $min_price = $request->filled('min_price') ? floatval(str_replace(['R$', '.', ','], ['', '', '.'], preg_replace('/[^\d,\.]/', '', $request->min_price))) : null;
+        $max_price = $request->filled('max_price') ? floatval(str_replace(['R$', '.', ','], ['', '', '.'], preg_replace('/[^\d,\.]/', '', $request->max_price))) : null;
 
         $query = Product::query();
+
+        // Only select products where stock > 0
+        $query->where('stock', '>', 0);
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        if ($request->filled('min_price') && $request->filled('max_price')) {
-            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        if (!is_null($min_price) && !is_null($max_price)) {
+            $query->whereBetween('price', [$min_price, $max_price]);
         }
 
         if ($request->filled('category')) {
