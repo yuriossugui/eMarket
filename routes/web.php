@@ -17,7 +17,6 @@ Route::post('/register', [LoginController::class, 'store'])->name('register.stor
 Route::post('/login', [LoginController::class, 'auth'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
 Route::middleware(['auth'])->group(function () {
     // product routes
     Route::get('/admin/product-index', [ProductController::class, 'index'])->name('product.index');
@@ -59,8 +58,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user-destroy', [UserController::class, 'delete'])->name('user.delete');
 });
 
-// ROTAS API
-
-Route::get('/api/hello', function () {
-    return response()->json(['message' => 'Hello API!']);
-});
+// store routes
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+// Route::get('/store', [StoreController::class, 'index'])->name('store.index.default');
