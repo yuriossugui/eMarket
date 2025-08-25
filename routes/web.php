@@ -60,4 +60,4 @@ Route::middleware(['auth'])->group(function () {
 
 // store routes
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
-// Route::get('/store', [StoreController::class, 'index'])->name('store.index.default');
+Route::get('/store-show/{id}', [StoreController::class, 'show'])->name('store.show');

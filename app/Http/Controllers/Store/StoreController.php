@@ -38,4 +38,10 @@ class StoreController extends Controller
         return view('Store.index', compact('products', 'categories'));
     }
 
+    public function show($id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        return view('Store.show', compact('product'));
+    }
+
 }

@@ -57,7 +57,9 @@
                                     <h5 class="product-title">{{ $product->name }}</h5>
                                     <p class="product-price">R$ {{ number_format($product->price, 2, ',', '.') }}</p>
                                     <p class="product-stock">Em estoque: {{ $product->stock }}</p>
-                                    <button class="btn buy-btn btn-sm mt-auto">Adicionar ao carrinho</button>
+                                    <a href="{{ route('store.show', $product->id) }}">
+                                        <button class="btn buy-btn btn-sm mt-auto">Adicionar ao carrinho</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
