@@ -20,7 +20,7 @@
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="mb-1"><strong>Preço:</strong> R$ {{ number_format($product->price, 2, ',', '.') }}</p>
                             <p class="mb-1"><strong>Estoque disponível:</strong> {{ $product->stock }}</p>
-                            <form method="" action="" class="mt-3">
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="mt-3">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="quantity" class="form-label">Quantidade</label>

@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\Store\ClientRegisterController;
+use App\Http\Controllers\Store\ClientLoginController;
 use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Store\StoreController;
+use App\Http\Controllers\Store\CartController;
 
 Route::get('/', [ProductController::class, 'index'])->name('home')->middleware('auth');
 
@@ -61,3 +63,16 @@ Route::middleware(['auth'])->group(function () {
 // store routes
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/store-show/{id}', [StoreController::class, 'show'])->name('store.show');
+
+// Cart routes
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+Route::get('/cliente/login', [ClientLoginController::class, 'showLoginForm'])->name('client.login');
+Route::post('/cliente/login', [ClientLoginController::class, 'login'])->name('client.login.post');
+Route::post('/cliente/logout', [ClientLoginController::class, 'logout'])->name('client.logout');
+
+// Registro do cliente
+Route::get('/cliente/registrar', [ClientRegisterController::class, 'showRegisterForm'])->name('client.register');
+Route::post('/cliente/registrar', [ClientRegisterController::class, 'register'])->name('client.register.post');

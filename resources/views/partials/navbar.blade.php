@@ -31,11 +31,13 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="perfilDropdown">
                         @if(auth()->check())
                             <p class="dropdown-item">Bem vindo, {{ auth()->user()->name }} </p>
+                            <a class="dropdown-item" href="{{ route('cart.index') }}">Carrinho</a>
+                            <a class="dropdown-item" href="">Pedido</a>
+                            <a class="dropdown-item" href="">Informações</a>
                         @else
                             <p class="dropdown-item">Nao logado</p>
+                            <p class="dropdown-item" href="">Faça login para acessar seu perfil</p>
                         @endif
-                        <a class="dropdown-item" href="">Pedidos</a>
-                        <a class="dropdown-item" href="">Informações</a>
                     </div>
                 </li>
             </ul>
